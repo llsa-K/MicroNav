@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MapPin, Moon, Sun } from 'lucide-react';
+import { Menu, X, MapPin, Moon, Sun, Navigation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import micronavLogo from '@/assets/micronav-logo.png';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -33,39 +32,49 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'nav-scrolled backdrop-blur-lg' 
+          ? 'bg-card/95 backdrop-blur-xl shadow-strong border-b border-border/50' 
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-20">
+          {/* Premium Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <img 
-              src={micronavLogo} 
-              alt="MicroNav" 
-              className="h-10 w-10 transition-transform duration-300 group-hover:scale-110"
-            />
-            <span className="text-2xl font-bold gradient-primary bg-clip-text text-transparent">
-              MicroNav
-            </span>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-glow to-accent rounded-xl blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative bg-gradient-to-br from-primary to-primary-glow p-3 rounded-xl shadow-strong group-hover:shadow-glow transition-all duration-300">
+                <Navigation className="h-6 w-6 text-white" />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold royal-accent premium-text">
+                MicroNav
+              </span>
+              <span className="text-xs text-muted-foreground font-medium tracking-widest uppercase">
+                Premium Navigation
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <Link key={item.name} to={item.path}>
                 <Button
                   variant="nav"
-                  className={`transition-all duration-300 ${
+                  size="lg"
+                  className={`premium-text transition-all duration-300 relative overflow-hidden ${
                     location.pathname === item.path
-                      ? 'bg-accent/20 text-accent font-semibold'
-                      : 'hover:text-accent'
+                      ? 'bg-gradient-to-r from-primary/20 to-accent/20 text-accent font-semibold shadow-medium' 
+                      : 'hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 hover:text-accent hover:shadow-soft'
                   }`}
                 >
-                  {item.name}
+                  <span className="relative z-10">{item.name}</span>
+                  {location.pathname === item.path && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary-glow/30 to-accent/30 animate-luxury-glow"></div>
+                  )}
                 </Button>
               </Link>
             ))}
@@ -87,14 +96,15 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
               )}
             </Button>
 
-            {/* Get Started Button */}
+            {/* Premium Get Started Button */}
             <Button 
-              variant="hero" 
-              className="hidden sm:flex animate-pulse-glow"
+              variant="premium" 
+              size="lg"
+              className="hidden sm:flex animate-luxury-glow premium-text tracking-wide"
               asChild
             >
               <Link to="/dashboard">
-                <MapPin className="w-4 h-4 mr-2" />
+                <MapPin className="w-5 h-5 mr-2" />
                 Get Started
               </Link>
             </Button>

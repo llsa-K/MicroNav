@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Search, MapPin, QrCode, Navigation, ArrowRight } from 'lucide-react';
+import { Search, MapPin, QrCode, Navigation, ArrowRight, Building, Users, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import heroImage from '@/assets/hero-navigation.jpg';
+import corporateImage from '@/assets/corporate-interior.jpg';
+import hospitalImage from '@/assets/hospital-corridor.jpg';
+import campusImage from '@/assets/campus-interior.jpg';
 
 const HeroSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,29 +20,37 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 gradient-hero opacity-95"></div>
-      
-      {/* Animated Background Elements */}
+      {/* Premium Background with Hero Image */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary-glow/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-primary/30 rounded-full blur-2xl animate-pulse-glow"></div>
+        <img 
+          src={heroImage} 
+          alt="Premium Indoor Navigation" 
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 gradient-hero opacity-95"></div>
+      </div>
+      
+      {/* Luxury Animated Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary-glow/30 rounded-full blur-3xl animate-float shadow-glow"></div>
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-accent/30 rounded-full blur-3xl animate-float shadow-glow" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-primary/40 rounded-full blur-2xl animate-luxury-glow"></div>
+        <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-accent/25 rounded-full blur-xl animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         <div className="animate-fade-in">
-          {/* Main Heading */}
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          {/* Premium Main Heading */}
+          <h1 className="luxury-heading text-white mb-8 leading-tight">
             Navigate
-            <span className="block text-primary-glow">Indoor Spaces</span>
-            <span className="text-4xl md:text-5xl font-light">Effortlessly</span>
+            <span className="block royal-accent mt-2">Indoor Spaces</span>
+            <span className="block text-4xl md:text-6xl font-light text-white/90 mt-4">Effortlessly</span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-            AI-powered indoor navigation for campuses, hospitals, and corporate buildings. 
-            Ask questions naturally, scan QR codes, and get step-by-step directions.
+          {/* Luxury Subtitle */}
+          <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed premium-text">
+            Premium AI-powered indoor navigation for exclusive venues, luxury campuses, and corporate headquarters. 
+            Experience unparalleled guidance with natural language queries and instant QR positioning.
           </p>
 
           {/* Search Interface */}
@@ -77,33 +89,47 @@ const HeroSection: React.FC = () => {
             </Button>
           </div>
 
-          {/* Feature Highlights */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {/* Premium Feature Highlights */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 icon: Navigation,
-                title: 'Smart Routing',
-                description: 'AI-powered pathfinding with accessibility options'
+                title: 'Intelligent Routing',
+                description: 'AI-powered pathfinding with premium accessibility features',
+                image: corporateImage
               },
               {
                 icon: QrCode,
-                title: 'QR Positioning',
-                description: 'Instant location detection via QR code scanning'
+                title: 'Instant Positioning',
+                description: 'Advanced QR code technology for precise location detection',
+                image: hospitalImage
               },
               {
                 icon: Search,
-                title: 'Natural Language',
-                description: 'Ask questions in plain English, get instant results'
+                title: 'Natural Interaction',
+                description: 'Sophisticated natural language processing for intuitive queries',
+                image: campusImage
               }
             ].map((feature, index) => (
               <div 
                 key={index} 
-                className="glass p-6 rounded-2xl hover-lift animate-slide-in-right"
+                className="group relative glass p-8 rounded-3xl hover-lift animate-slide-in-right overflow-hidden"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <feature.icon className="w-10 h-10 text-primary-glow mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-white/80">{feature.description}</p>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <div className="relative mb-6">
+                    <img 
+                      src={feature.image} 
+                      alt={feature.title}
+                      className="w-full h-32 object-cover rounded-xl opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent rounded-xl"></div>
+                    <feature.icon className="absolute bottom-3 right-3 w-8 h-8 text-white shadow-glow" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white mb-3 premium-text">{feature.title}</h3>
+                  <p className="text-white/80 leading-relaxed">{feature.description}</p>
+                </div>
               </div>
             ))}
           </div>

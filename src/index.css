@@ -139,7 +139,20 @@
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground transition-colors duration-300 font-circe;
+  }
+  
+  /* Luxury Typography */
+  .luxury-heading {
+    @apply font-luxury font-bold text-5xl md:text-7xl leading-tight tracking-tight;
+  }
+  
+  .premium-text {
+    @apply font-circe font-medium tracking-wide;
+  }
+  
+  .royal-accent {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-glow via-accent to-primary-glow animate-gradient-x;
   }
 }
 
