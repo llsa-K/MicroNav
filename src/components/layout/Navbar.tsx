@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MapPin, Moon, Sun, Navigation } from 'lucide-react';
+import { Menu, X, MapPin, Moon, Sun, Navigation, User, LogOut, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTheme } from '@/components/layout/ThemeProvider';
+import LoginModal from '@/components/auth/LoginModal';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -11,7 +13,9 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const location = useLocation();
+  const { user, logout, isAdmin } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
     { name: 'Features', path: '/features' },
     { name: 'Industries', path: '/industries' },
     { name: 'Dashboard', path: '/dashboard' },
+    ...(isAdmin ? [{ name: 'Admin', path: '/admin' }] : []),
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -96,18 +101,34 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
               )}
             </Button>
 
-            {/* Premium Get Started Button */}
-            <Button 
-              variant="premium" 
-              size="lg"
-              className="hidden sm:flex animate-luxury-glow premium-text tracking-wide"
-              asChild
-            >
-              <Link to="/dashboard">
-                <MapPin className="w-5 h-5 mr-2" />
-                Get Started
-              </Link>
-            </Button>
+            {/* User Authentication */}
+            {user ? (
+              <div className="hidden sm:flex items-center gap-3">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary/50">
+                  {isAdmin && <Shield className="w-4 h-4 text-primary" />}
+                  <span className="text-sm font-medium">{user.name}</span>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={logout}
+                  className="flex items-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Button 
+                variant="premium" 
+                size="lg"
+                onClick={() => setShowLogin(true)}
+                className="hidden sm:flex animate-luxury-glow premium-text tracking-wide"
+              >
+                <User className="w-5 h-5 mr-2" />
+                Sign In
+              </Button>
+            )}
 
             {/* Mobile menu button */}
             <Button
@@ -143,16 +164,43 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
                   {item.name}
                 </Link>
               ))}
-              <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-                <Button variant="hero" className="w-full mt-3">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  Get Started
+              {user ? (
+                <div className="pt-3 border-t border-border/50">
+                  <div className="flex items-center gap-2 mb-3 px-3 py-2 rounded-lg bg-secondary/50">
+                    {isAdmin && <Shield className="w-4 h-4 text-primary" />}
+                    <span className="text-sm font-medium">{user.name}</span>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      logout();
+                      setIsOpen(false);
+                    }}
+                    className="w-full"
+                  >
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <Button 
+                  variant="hero" 
+                  onClick={() => {
+                    setShowLogin(true);
+                    setIsOpen(false);
+                  }}
+                  className="w-full mt-3"
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  Sign In
                 </Button>
-              </Link>
+              )}
             </div>
           </div>
         )}
       </div>
+      
+      <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
     </nav>
   );
 };

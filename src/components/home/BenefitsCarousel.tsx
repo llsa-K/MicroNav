@@ -21,38 +21,32 @@ const BenefitsCarousel: React.FC = () => {
     {
       icon: Building2,
       title: 'Smart Buildings & Facilities',
-      description: 'Room-level tracking for offices, campuses, hospitals, and malls',
+      description: 'Room-level tracking for offices, campuses, hospitals, and malls with precision indoor positioning',
       color: 'text-blue-500'
     },
     {
       icon: Hospital,
-      title: 'Healthcare Navigation',
-      description: 'Locate patients, staff, and equipment inside hospitals efficiently',
+      title: 'Healthcare',
+      description: 'Locating patients, staff, or equipment inside hospitals for improved efficiency and patient care',
       color: 'text-green-500'
     },
     {
-      icon: GraduationCap,
-      title: 'Campus Solutions',
-      description: 'Help students and visitors navigate complex university buildings',
+      icon: BarChart3,
+      title: 'Logistics & Warehousing',
+      description: 'Tracking goods and workers for efficiency and safety in complex warehouse environments',
       color: 'text-purple-500'
     },
     {
       icon: ShoppingCart,
-      title: 'Retail Enhancement',
-      description: 'Personalized customer navigation and in-store analytics',
+      title: 'Retail',
+      description: 'Personalized customer navigation and in-store analytics to enhance shopping experience',
       color: 'text-orange-500'
     },
     {
       icon: Shield,
       title: 'Emergency Management',
-      description: 'Real-time tracking during evacuations in high-rise buildings',
+      description: 'Real-time tracking of people during evacuations or in high-rise buildings for safety',
       color: 'text-red-500'
-    },
-    {
-      icon: BarChart3,
-      title: 'Analytics & Insights',
-      description: 'Track foot traffic patterns and optimize space utilization',
-      color: 'text-indigo-500'
     }
   ];
 

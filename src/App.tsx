@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import AdminPanel from "./components/admin/AdminPanel";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<AdminPanel />} />
             <Route path="/features" element={<Home />} />
             <Route path="/industries" element={<Home />} />
             <Route path="/contact" element={<Home />} />
